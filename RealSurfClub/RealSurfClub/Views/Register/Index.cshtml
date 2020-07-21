@@ -1,0 +1,100 @@
+﻿@model RealSurfClub.Models.DBModel.User
+@{
+    ViewBag.Title = "Клуб любителей серфинга - Регистрация";
+}
+
+<div class="panel panel-info registration_view center-block">
+
+    <div class="panel-heading" style="color: #000000; background: #DCE4E9; font-weight: 500; font-size: 17px;">
+        Регистрация нового пользователя
+    </div>
+
+    <div class="panel-body">
+        @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+        <form>
+            <div class="form-group elem_register" style="width:40%;">
+                @Html.LabelFor(model => model.Nickname)
+                @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", title = "От 3 до 20 символов. Используйте латиницу, кириллицу, цифры и подчёркивания" } })
+                <div class="text-danger">
+                    @Html.ValidationMessageFor(model => model.Nickname)
+                </div>
+            </div>
+
+            <div class="form-group elem_register" style="width:40%;">
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", title = "Пример ex@example.ex" } })
+                <div class="text-danger">
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="form-group elem_register" style="width:40%;">
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", title = "От 6 до 20 символов. Используйте латиницу, цифры и подчёркивания", type = "password" } })
+                <div class="text-danger">
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+
+            <div class="form-group elem_register" style="width:40%;">
+                @Html.LabelFor(model => model.PasswordСonfirm)
+                @Html.EditorFor(model => model.PasswordСonfirm, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                <div class="text-danger">
+                    @Html.ValidationMessageFor(model => model.PasswordСonfirm)
+                </div>
+            </div>
+
+            <div class="form-group elem_register" style="width:40%;">
+                @Html.LabelFor(model => model.Lastname)
+                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control", title = "" } })
+                @Html.ValidationMessageFor(model => model.Lastname)
+            </div>
+
+            <div class="form-group elem_register" style="width:40%;">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", title = "" } })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="form-group elem_register">
+                @Html.LabelFor(model => model.Photo)
+                <input name="imageData" type="file" accept="image/jpeg" />
+            </div>
+
+            <div class="form-group1 elem_register">
+                @Html.LabelFor(model => model.ContactInfo)<br />
+                @Html.TextAreaFor(model => model.ContactInfo, 10, 100, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group1 elem_register">
+                @Html.LabelFor(model => model.About)<br />
+                @Html.TextAreaFor(model => model.About, 10, 100, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+
+            <div class="form-group1 elem_register">
+                @Html.LabelFor(model => model.Achivements)<br />
+                @Html.TextAreaFor(model => model.Achivements, 10, 100, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group" style="margin-top: 16px">
+                * - поля, обязательные для заполнения
+                <button type="submit" class="btn-register" style="float: right;">Зарегистрироваться</button>
+            </div>
+
+</form>
+    }
+    </div>
+</div>
+<div class="center-block" style="text-align: center; color: #6C757D; margin-top:-25px;">
+    Уже есть аккаунт?
+    <button type="button" class="btn-input btn_reg_small">@Html.ActionLink("Войти", "Index", "Home")</button>
+</div>
+
