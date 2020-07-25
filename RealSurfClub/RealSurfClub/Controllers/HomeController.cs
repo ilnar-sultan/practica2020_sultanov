@@ -17,6 +17,10 @@ namespace RealSurfClub.Controllers
 
         public ActionResult Index()
         {
+            if (TempData["errormessage"] != null)
+            {
+                ViewBag.Message = TempData["errormessage"].ToString();
+            }
             return View();
         }
 

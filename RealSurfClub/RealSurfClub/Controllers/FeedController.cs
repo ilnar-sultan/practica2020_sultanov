@@ -24,6 +24,15 @@ namespace RealSurfClub.Controllers
         [HttpPost]
         public ActionResult AddPost(Post model, HttpPostedFileBase imageData)
         {
+
+            if (!ModelState.IsValid)
+            {
+                var postsDb = dbContext.Posts.OrderByDescending(c => c.Id).ToList();
+                ViewBag.Posts = postsDb;
+
+                return View("Index", model);
+            }
+
             if (imageData == null && model.Text == null)
             {
                 ModelState.AddModelError(string.Empty, "Не загружено изображение или отсутствует текст");
@@ -41,12 +50,28 @@ namespace RealSurfClub.Controllers
 
             if (imageData != null)
             {
+                if (!ImageFormatHelper.IsJpg(imageData))
+                {
+
+                    ModelState.AddModelError(string.Empty, "Загруженное изображение не картинка формата JPG");
+                    var postsdb = dbContext.Posts.OrderByDescending(c => c.Id).ToList();
+                    ViewBag.Posts = postsdb;
+                    return View("Index", model);
+                }
+
                 model.Photo = ImageSaveHelper.SaveImage(imageData);
             }
 
             // автор - пользователь с текущим Id
             var userId = Convert.ToInt32(Session["UserId"]);
             var userInDb = dbContext.Users.FirstOrDefault(c => c.Id == userId);
+
+            if(userInDb == null)
+            {
+                // пользователь не автроизован
+                TempData["errormessage"] = "Время сессии истекло. Авторизуйтесь повторно.";
+                return RedirectToAction("Index", "Home");
+            }
 
             model.Author = userInDb;
             
@@ -56,6 +81,9 @@ namespace RealSurfClub.Controllers
 
             var posts = dbContext.Posts.OrderByDescending(c => c.Id).ToList();
             ViewBag.Posts = posts;
+
+            ModelState.Clear();
+
             return View("Index");
         }
 

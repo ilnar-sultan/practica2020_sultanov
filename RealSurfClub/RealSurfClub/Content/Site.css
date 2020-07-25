@@ -150,14 +150,11 @@ label {
     width:230px;
     color: #000000;
     background: #DCE4E9;
+    font-weight: 600;
+    font-size: 14px;
     border: 1px solid #AABACC;
 }
 
-.register_btn a {
-    color: #000000;
-    font-weight: 600;
-    font-size: 14px;
-}
 
 
 
@@ -171,28 +168,20 @@ label {
 .btn_reg_small {
     width: 152px;
     height: 35px;
-    margin-left: 20px;
-}
-.btn_reg_small a{
     color: #000000;
     font-weight: 600;
     font-size: 16px;
+    margin-left: 20px;
 }
-
 
 .btn_register {
     width: 184px;
-    height: 50px;
+    height: 35px;
     margin-left: 10px;
     font-weight: 600;
     background-color: #DCE4E9;
     font-size: 16px;
     border: 1px solid #AABACC;
-}
-
-.btn_register a{
-    font-weight: 600;
-    color: #000000;
 }
 
 .elem_register {
@@ -212,3 +201,4 @@ label {
     border: 1px solid #CED4DA;
     border-radius: 5px;
 }
+
